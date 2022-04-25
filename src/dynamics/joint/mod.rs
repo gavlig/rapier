@@ -8,6 +8,7 @@ pub use self::revolute_joint::RevoluteJoint;
 
 #[cfg(feature = "dim3")]
 pub use self::spherical_joint::SphericalJoint;
+pub use self::wheel_joint::WheelJoint;
 
 mod fixed_joint;
 mod impulse_joint;
@@ -19,3 +20,4 @@ mod revolute_joint;
 
 #[cfg(feature = "dim3")]
 mod spherical_joint;
+mod wheel_joint;

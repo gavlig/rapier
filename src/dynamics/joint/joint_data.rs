@@ -217,6 +217,11 @@ impl JointData {
         self
     }
 
+    pub fn unlimit_axis(mut self, axis: JointAxis) -> Self {
+        self.limit_axes &= !JointAxesMask::from_bits(1 << axis as usize).unwrap();
+        self
+    }
+
     /// Set the spring-like model used by the motor to reach the desired target velocity and position.
     pub fn motor_model(mut self, axis: JointAxis, model: MotorModel) -> Self {
         self.motors[axis as usize].model = model;
