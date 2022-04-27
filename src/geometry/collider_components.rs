@@ -163,6 +163,20 @@ impl ColliderMassProps {
             Self::MassProperties(mprops) => **mprops,
         }
     }
+
+    pub fn density(&self) -> Real {
+        match self {
+            Self::Density(density) => *density,
+            Self::MassProperties(_) => 0.0,
+        }
+    }
+
+    pub fn density_mut(&mut self) -> Real {
+        match self {
+            Self::Density(density) => *density,
+            Self::MassProperties(_) => 0.0,
+        }
+    }
 }
 
 #[derive(Copy, Clone, Debug, PartialEq)]
