@@ -119,6 +119,7 @@ pub struct JointData {
     pub motor_axes: JointAxesMask,
     pub limits: [JointLimits; SPATIAL_DIM],
     pub motors: [JointMotor; SPATIAL_DIM],
+    pub motor_changed: bool,
 }
 
 impl Default for JointData {
@@ -131,6 +132,7 @@ impl Default for JointData {
             motor_axes: JointAxesMask::FREE,
             limits: [JointLimits::default(); SPATIAL_DIM],
             motors: [JointMotor::default(); SPATIAL_DIM],
+            motor_changed: false,
         }
     }
 }
@@ -265,6 +267,7 @@ impl JointData {
         self.motors[i].target_pos = target_pos;
         self.motors[i].stiffness = stiffness;
         self.motors[i].damping = damping;
+        self.motor_changed = true;
         self
     }
 
