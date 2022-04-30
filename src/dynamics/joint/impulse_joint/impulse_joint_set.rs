@@ -272,18 +272,16 @@ impl ImpulseJointSet {
         for (i, edge) in self.joint_graph.graph.edges.iter().enumerate() {
             let joint = &edge.weight;
 
-            let (status1, activation1, ids1): (
+            let (status1, activation1): (
                 &RigidBodyType,
                 &RigidBodyActivation,
-                &RigidBodyIds,
             ) = bodies.index_bundle(joint.body1.0);
-            let (status2, activation2, ids2): (
+            let (status2, activation2): (
                 &RigidBodyType,
                 &RigidBodyActivation,
-                &RigidBodyIds,
             ) = bodies.index_bundle(joint.body2.0);
 
-            if (activation1.sleeping || activation2.sleeping) && joint.data.motor_changed {
+            if (activation1.sleeping || activation2.sleeping) && (status1.is_dynamic() || status2.is_dynamic()) &&joint.data.motor_changed {
                 to_wake_up.push((edge.source(), i));
                 to_wake_up.push((edge.target(), i));
             }
