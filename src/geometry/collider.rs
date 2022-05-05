@@ -239,6 +239,12 @@ impl Collider {
         }
     }
 
+    /// Set density of this collider.
+    pub fn set_density(&mut self, density: Real) {
+        self.changes.insert(ColliderChanges::SHAPE);
+        self.mprops = ColliderMassProps::Density(density);
+    }
+
     /// The geometric shape of this collider.
     pub fn shape(&self) -> &dyn Shape {
         self.shape.as_ref()
@@ -283,6 +289,12 @@ impl Collider {
             ColliderMassProps::MassProperties(mass_properties) => **mass_properties,
         }
     }
+
+    //// Set mass properties of this collider.
+    // pub fn set_mass_properties(&mut self, mass_props: MassProperties) {
+    //     self.changes.insert(ColliderChanges::SHAPE);
+    //     self.mprops = ColliderMassProps::MassProperties(mass_props);//.into();
+    // }
 }
 
 /// A structure responsible for building a new collider.
