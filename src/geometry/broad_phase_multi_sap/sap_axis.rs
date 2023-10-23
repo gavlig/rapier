@@ -250,7 +250,7 @@ impl SAPAxis {
                     if endpoint_j.is_end() {
                         // Report start collision.
                         let proxy_j = &proxies[endpoint_j.proxy()];
-                        if aabb_i.intersects(&proxy_j.aabb) {
+                        if aabb_i.intersects(&proxy_j.aabb) && endpoint_i.proxy() != endpoint_j.proxy() {
                             let pair = super::sort2(endpoint_i.proxy(), endpoint_j.proxy());
                             reporting.insert(pair, true);
                         }
@@ -265,7 +265,7 @@ impl SAPAxis {
 
                     if endpoint_j.is_start() {
                         // Report end collision.
-                        if !aabb_i.intersects(&proxies[endpoint_j.proxy()].aabb) {
+                        if !aabb_i.intersects(&proxies[endpoint_j.proxy()].aabb) && endpoint_i.proxy() != endpoint_j.proxy() {
                             let pair = super::sort2(endpoint_i.proxy(), endpoint_j.proxy());
                             reporting.insert(pair, false);
                         }
